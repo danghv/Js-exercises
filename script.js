@@ -7,7 +7,7 @@ function reverseString (str) {
 	var specialCharacter;
 	for (var i = 0; i < strBuff.length; i++) {
 			specialCharacter = strBuff[i].charAt(strBuff[i].length - 1);
-			if( [".", ","].indexOf(specialCharacter) > -1 ) {
+			if( [".", ",", "?"].indexOf(specialCharacter) > -1 ) {
 				
 				console.log(specialCharacter);
 				// console.log(strBuff[4].charAt(strBuff.length - 1));
@@ -55,6 +55,6 @@ function searchMaxWord (str) {
 
 //test case
 
-console.log(reverseString("hi there. i am Dang. ?!"));
+console.log(reverseString("Một tiếng súng chỉ thiên vang lên uy hiếp Thọ, trinh sát P. lao vào đập tan cửa kính taxi, khi những mảnh kính rơi còn chưa kịp chạm đất thì cánh tay chắc nịch của trinh sát đã khống chế Thọ."));
 console.log(upperFirstLetter("hi there, i am Dang"));
 console.log(searchMaxWord("hi thereeeeeeeeeeee, i am Daaaaaaaaaaaaaaaaang ?????????????????????????????????????????????????!!!!!!!!!!!!"));
