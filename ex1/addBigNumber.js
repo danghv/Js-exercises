@@ -29,10 +29,11 @@ function addBigNumber(number1, number2) {
     var i, j;
     var n1 = new Stack();
     var n2 = new Stack();
-    var result = new Stack();
+    var n3 = new Stack();
     var a = number1.toString().split('');
     var b = number2.toString().split('');
-    var sub, carry;
+    var sub;
+    var carry = 0;
     for (var i = 0; i < a.length; i++) {
         n1.pushStack(a[i]);
     }
@@ -41,12 +42,61 @@ function addBigNumber(number1, number2) {
         n2.pushStack(b[j]);
     }
     console.log(n2.dataStore);
-    if (n1.lengthStack() < n2.lengthStack()) {
+    var stackA = n1.lengthStack();
+    var stackB = n2.lengthStack();
+    if (stackA < stackB) {
+        while (n1.lengthStack() > 0) {
+            let x = parseInt(n1.popStack());
+            let y = parseInt(n2.popStack());
+            sub = x + y + carry;
+            if(sub > 9) {
+                carry = 1;
+                n3.pushStack(sub.toString().split('')[1]);
+            } else {
+                n3.pushStack(sub);
+                carry = 0;
+            }
+        }
         while (n2.lengthStack() > 0) {
-            sub = n1.popStack() + n2.popStack();
+            let y = parseInt(n2.popStack());
+            sub = y + carry;
+            if (sub > 9) {
+                carry = 1;
+                n3.pushStack(sub.toString().split('')[1]);
+            } else {
+                n3.pushStack(sub);
+                carry = 0;
+            }
+        }
+    
+    } else {
+        while (n2.lengthStack() > 0) {
+            let x = parseInt(n1.popStack());
+            let y = parseInt(n2.popStack());
+            sub = x + y + carry;
+            if(sub > 9) {
+                carry = 1;
+                n3.pushStack(sub.toString().split('')[1]);
+            } else {
+                n3.pushStack(sub);
+                carry = 0;
+            }
+        }
+        while (n1.lengthStack() > 0) {
+            let x = parseInt(n1.popStack());
+            sub = x + carry;
+            if (sub > 9) {
+                carry = 1;
+                n3.pushStack(sub.toString().split('')[1]);
+            } else {
+                n3.pushStack(sub);
+                carry = 0;
+            }
         }
     }
 
+    return n3.dataStore.reverse().join('');
+
 }
 
-console.log(addBigNumber(389, 429));
+console.log(addBigNumber(79, 429));
